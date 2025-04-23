@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seguimiento de Entrenamientos - FitLife Entrenamiento Personal</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF6B35',
+                        secondary: '#2E4057',
+                        light: '#F7F7F7',
+                        dark: '#333333',
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                        heading: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans bg-light">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <a href="index.html" class="text-2xl font-bold text-primary font-heading">FitLife</a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-secondary hover:text-primary font-medium transition duration-300">Inicio</a>
+                    <a href="about.html" class="text-secondary hover:text-primary font-medium transition duration-300">Nosotros</a>
+                    <a href="plans.html" class="text-secondary hover:text-primary font-medium transition duration-300">Planes</a>
+                    <a href="testimonials.html" class="text-secondary hover:text-primary font-medium transition duration-300">Testimonios</a>
+                    <a href="contact.html" class="text-secondary hover:text-primary font-medium transition duration-300">Contacto</a>
+                    <a href="calculadora-imc.html" class="text-secondary hover:text-primary font-medium transition duration-300">Calculadora IMC</a>
+                    <a href="seguimiento-entrenamientos.html" class="text-primary font-medium transition duration-300">Seguimiento</a>
+                </div>
+                <div class="hidden md:flex space-x-4">
+                    <a href="login.php" class="px-4 py-2 text-secondary font-medium hover:text-primary transition duration-300">Iniciar Sesión</a>
+                    <a href="register.php" class="px-4 py-2 bg-primary text-white rounded-md hover:bg-opacity-90 transition duration-300">Registrarse</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-secondary focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="md:hidden hidden pb-4">
+                <a href="index.html" class="block py-2 text-secondary hover:text-primary font-medium">Inicio</a>
+                <a href="about.html" class="block py-2 text-secondary hover:text-primary font-medium">Nosotros</a>
+                <a href="plans.html" class="block py-2 text-secondary hover:text-primary font-medium">Planes</a>
+                <a href="testimonials.html" class="block py-2 text-secondary hover:text-primary font-medium">Testimonios</a>
+                <a href="contact.html" class="block py-2 text-secondary hover:text-primary font-medium">Contacto</a>
+                <a href="calculadora-imc.html" class="block py-2 text-secondary hover:text-primary font-medium">Calculadora IMC</a>
+                <a href="seguimiento-entrenamientos.html" class="block py-2 text-primary font-medium">Seguimiento</a>
+                <div class="flex space-x-4 mt-4">
+                    <a href="login.php" class="px-4 py-2 text-secondary font-medium hover:text-primary transition duration-300">Iniciar Sesión</a>
+                    <a href="register.php" class="px-4 py-2 bg-primary text-white rounded-md hover:bg-opacity-90 transition duration-300">Registrarse</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="py-20 bg-secondary">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold text-white font-heading mb-4">Seguimiento de Entrenamientos</h1>
+            <p class="text-white text-lg max-w-3xl mx-auto">Registra y haz seguimiento de tus entrenamientos para monitorizar tu progreso y mantener la motivación.</p>
+        </div>
+    </section>
+
+    <!-- Workout Tracker Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-5xl mx-auto">
+                <div class="bg-light p-8 rounded-lg shadow-md">
+                    <h2 class="text-2xl font-bold text-secondary font-heading mb-6">Registra tu entrenamiento</h2>
+                    
+                    <div class="mb-8">
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+                            <div class="mb-4 md:mb-0">
+                                <label for="workout-date" class="block text-gray-700 font-medium mb-2">Fecha del entrenamiento</label>
+                                <input type="date" id="workout-date" class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                            </div>
+                            <div>
+                                <label for="workout-type" class="block text-gray-700 font-medium mb-2">Tipo de entrenamiento</label>
+                                <select id="workout-type" class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                    <option value="">Selecciona un tipo</option>
+                                    <option value="Fuerza">Fuerza</option>
+                                    <option value="Cardio">Cardio</option>
+                                    <option value="HIIT">HIIT</option>
+                                    <option value="Flexibilidad">Flexibilidad</option>
+                                    <option value="Funcional">Funcional</option>
+                                    <option value="Otro">Otro</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="workout-notes" class="block text-gray-700 font-medium mb-2">Notas (opcional)</label>
+                            <textarea id="workout-notes" rows="2" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Añade notas sobre tu entrenamiento..."></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h3 class="text-xl font-bold text-secondary mb-4">Ejercicios</h3>
+                        
+                        <div id="exercises-container">
+                            <!-- Exercise template will be cloned and added here -->
+                        </div>
+                        
+                        <div class="exercise-template hidden">
+                            <div class="exercise-item bg-white p-4 rounded-lg border border-gray-200 mb-4">
+                                <div class="flex flex-col md:flex-row md:items-center md:space-x-4 mb-4">
+                                    <div class="flex-grow mb-4 md:mb-0">
+                                        <label class="block text-gray-700 font-medium mb-2">Nombre del ejercicio</label>
+                                        <input type="text" class="exercise-name w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Ej: Press de banca">
+                                    </div>
+                                    <div>
+                                        <label class="block text-gray-700 font-medium mb-2">Categoría</label>
+                                        <select class="exercise-category px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                            <option value="">Selecciona</option>
+                                            <option value="Pecho">Pecho</option>
+                                            <option value="Espalda">Espalda</option>
+                                            <option value="Piernas">Piernas</option>
+                                            <option value="Hombros">Hombros</option>
+                                            <option value="Brazos">Brazos</option>
+                                            <option value="Core">Core</option>
+                                            <option value="Cardio">Cardio</option>
+                                            <option value="Otro">Otro</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="sets-container">
+                                    <div class="grid grid-cols-4 gap-2 mb-2 font-medium text-gray-700">
+                                        <div>Serie</div>
+                                        <div>Peso (kg)</div>
+                                        <div>Repeticiones</div>
+                                        <div></div>
+                                    </div>
+                                    
+                                    <div class="sets-list">
+                                        <!-- Set rows will be added here -->
+                                    </div>
+                                    
+                                    <div class="set-template hidden">
+                                        <div class="set-row grid grid-cols-4 gap-2 mb-2 items-center">
+                                            <div class="set-number">1</div>
+                                            <div>
+                                                <input type="number" class="set-weight w-full px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Peso">
+                                            </div>
+                                            <div>
+                                                <input type="number" class="set-reps w-full px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Reps">
+                                            </div>
+                                            <div>
+                                                <button type="button" class="remove-set px-2 py-1 bg-red-500 text-white rounded-md hover:bg-red-600 transition duration-300">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <button type="button" class="add-set mt-2 px-3 py-1 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300">
+                                        <i class="fas fa-plus mr-1"></i> Añadir serie
+                                    </button>
+                                </div>
+                                
+                                <div class="flex justify-end mt-4">
+                                    <button type="button" class="remove-exercise px-3 py-1 bg-red-500 text-white rounded-md hover:bg-red-600 transition duration-300">
+                                        <i class="fas fa-trash mr-1"></i> Eliminar ejercicio
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button type="button" id="add-exercise" class="px-4 py-2 bg-secondary text-white rounded-md hover:bg-opacity-90 transition duration-300">
+                            <i class="fas fa-plus mr-2"></i> Añadir ejercicio
+                        </button>
+                    </div>
+                    
+                    <div class="flex justify-between">
+                        <button type="button" id="clear-form" class="px-6 py-3 bg-gray-500 text-white font-medium rounded-md hover:bg-opacity-90 transition duration-300">
+                            <i class="fas fa-times mr-2"></i> Limpiar formulario
+                        </button>
+                        <button type="button" id="save-workout" class="px-6 py-3 bg-primary text-white font-medium rounded-md hover:bg-opacity-90 transition duration-300">
+                            <i class="fas fa-save mr-2"></i> Guardar entrenamiento
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Workout History -->
+                <div class="mt-12 bg-light p-8 rounded-lg shadow-md">
+                    <h2 class="text-2xl font-bold text-secondary font-heading mb-6">Historial de entrenamientos</h2>
+                    
+                    <div id="workout-history">
+                        <div id="no-workouts" class="text-center py-8">
+                            <i class="fas fa-dumbbell text-gray-300 text-5xl mb-4"></i>
+                            <p class="text-gray-500">No hay entrenamientos registrados. ¡Comienza a registrar tus entrenamientos arriba!</p>
+                        </div>
+                        
+                        <div id="workouts-list" class="hidden space-y-4">
+                            <!-- Workout history items will be added here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-12 bg-blue-50 p-6 rounded-lg border border-blue-200">
+                    <h3 class="text-lg font-bold text-secondary mb-4">Beneficios del seguimiento de entrenamientos</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-primary mt-1 mr-2"></i>
+                            <span>Monitoriza tu progreso y visualiza tus mejoras a lo largo del tiempo</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-primary mt-1 mr-2"></i>
+                            <span>Mantén la motivación al ver cómo aumentas pesos o repeticiones</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-primary mt-1 mr-2"></i>
+                            <span>Identifica patrones y áreas de mejora en tu entrenamiento</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-primary mt-1 mr-2"></i>
+                            <span>Comparte tu progreso con tu entrenador para recibir feedback personalizado</span>
+                        </li>
+                    </ul>
+                    <p class="mt-4 text-sm text-gray-600">Nota: Esta herramienta guarda los datos en el almacenamiento local de tu navegador. Para una experiencia completa con almacenamiento en la nube y más funcionalidades, regístrate en nuestra plataforma.</p>
+                </div>
+                
+                <div class="mt-8 text-center">
+                    <p class="text-gray-600 mb-4">¿Quieres llevar tu seguimiento al siguiente nivel?</p>
+                    <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                        <a href="plans.html" class="px-6 py-3 bg-primary text-white font-medium rounded-md hover:bg-opacity-90 transition duration-300">Ver Planes de Entrenamiento</a>
+                        <a href="contact.html" class="px-6 py-3 bg-secondary text-white font-medium rounded-md hover:bg-opacity-90 transition duration-300">Contactar con un Entrenador</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4 font-heading">FitLife</h3>
+                    <p class="text-gray-400 mb-4">Transformando vidas a través del entrenamiento personalizado y un estilo de vida saludable.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-primary transition duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition duration-300">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition duration-300">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition duration-300">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4 font-heading">Enlaces Rápidos</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-primary transition duration-300">Inicio</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-primary transition duration-300">Nosotros</a></li>
+                        <li><a href="plans.html" class="text-gray-400 hover:text-primary transition duration-300">Planes</a></li>
+                        <li><a href="testimonials.html" class="text-gray-400 hover:text-primary transition duration-300">Testimonios</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-primary transition duration-300">Contacto</a></li>
+                        <li><a href="calculadora-imc.html" class="text-gray-400 hover:text-primary transition duration-300">Calculadora IMC</a></li>
+                        <li><a href="seguimiento-entrenamientos.html" class="text-gray-400 hover:text-primary transition duration-300">Seguimiento</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4 font-heading">Servicios</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition duration-300">Entrenamiento Personal</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition duration-300">Asesoramiento Nutricional</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition duration-300">Entrenamiento en Grupo</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition duration-300">Programas Online</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition duration-300">Evaluación Física</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4 font-heading">Contacto</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-primary mt-1 mr-3"></i>
+                            <span class="text-gray-400">Calle Principal 123, Madrid, España</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone text-primary mr-3"></i>
+                            <span class="text-gray-400">+34 912 345 678</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope text-primary mr-3"></i>
+                            <span class="text-gray-400">info@fitlife.com</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-clock text-primary mr-3"></i>
+                            <span class="text-gray-400">Lun-Vie: 7:00 - 21:00</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-12 pt-8 text-center">
+                <p class="text-gray-400">&copy; 2023 FitLife - Entrenamiento Personal. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Workout Tracker Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize with current date
+            document.getElementById('workout-date').valueAsDate = new Date();
+            
+            // Add exercise button
+            document.getElementById('add-exercise').addEventListener('click', function() {
+                addExercise();
+            });
+            
+            // Clear form button
+            document.getElementById('clear-form').addEventListener('click', function() {
+                if (confirm('¿Estás seguro de que quieres limpiar el formulario? Perderás todos los datos no guardados.')) {
+                    clearForm();
+                }
+            });
+            
+            // Save workout button
+            document.getElementById('save-workout').addEventListener('click', function() {
+                saveWorkout();
+            });
+            
+            // Add first exercise by default
+            addExercise();
+            
+            // Load workout history
+            loadWorkoutHistory();
+        });
+        
+        function addExercise() {
+            const exercisesContainer = document.getElementById('exercises-container');
+            const exerciseTemplate = document.querySelector('.exercise-template');
+            
+            // Clone the exercise template
+            const newExercise = exerciseTemplate.cloneNode(true);
+            newExercise.classList.remove('hidden', 'exercise-template');
+            
+            // Add event listeners for this exercise
+            const addSetBtn = newExercise.querySelector('.add-set');
+            addSetBtn.addEventListener('click', function() {
+                addSet(this.closest('.exercise-item'));
+            });
+            
+            const removeExerciseBtn = newExercise.querySelector('.remove-exercise');
+            removeExerciseBtn.addEventListener('click', function() {
+                if (document.querySelectorAll('#exercises-container .exercise-item').length > 1 || 
+                    confirm('¿Estás seguro de que quieres eliminar este ejercicio? Si es el único, se limpiará el formulario.')) {
+                    this.closest('.exercise-item').remove();
+                }
+            });
+            
+            // Add to the container
+            exercisesContainer.appendChild(newExercise);
+            
+            // Add first set
+            addSet(newExercise);
+        }
+        
+        function addSet(exerciseElement) {
+            const setsContainer = exerciseElement.querySelector('.sets-list');
+            const setTemplate = exerciseElement.querySelector('.set-template');
+            
+            // Clone the set template
+            const newSet = setTemplate.cloneNode(true);
+            newSet.classList.remove('hidden', 'set-template');
+            
+            // Update set number
+            const setNumber = setsContainer.children.length + 1;
+            newSet.querySelector('.set-number').textContent = setNumber;
+            
+            // Add event listener for remove button
+            const removeSetBtn = newSet.querySelector('.remove-set');
+            removeSetBtn.addEventListener('click', function() {
+                this.closest('.set-row').remove();
+                
+                // Update set numbers
+                const setRows = setsContainer.querySelectorAll('.set-row');
+                setRows.forEach((row, index) => {
+                    row.querySelector('.set-number').textContent = index + 1;
+                });
+            });
+            
+            // Add to the container
+            setsContainer.appendChild(newSet);
+        }
+        
+        function clearForm() {
+            document.getElementById('workout-date').valueAsDate = new Date();
+            document.getElementById('workout-type').value = '';
+            document.getElementById('workout-notes').value = '';
+            
+            // Remove all exercises except the first one
+            const exercises = document.querySelectorAll('#exercises-container .exercise-item');
+            for (let i = 1; i < exercises.length; i++) {
+                exercises[i].remove();
+            }
+            
+            // Clear first exercise
+            if (exercises.length > 0) {
+                const firstExercise = exercises[0];
+                firstExercise.querySelector('.exercise-name').value = '';
+                firstExercise.querySelector('.exercise-category').value = '';
+                
+                // Remove all sets except the first one
+                const sets = firstExercise.querySelectorAll('.set-row');
+                for (let i = 1; i < sets.length; i++) {
+                    sets[i].remove();
+                }
+                
+                // Clear first set
+                if (sets.length > 0) {
+                    sets[0].querySelector('.set-weight').value = '';
+                    sets[0].querySelector('.set-reps').value = '';
+                }
+            } else {
+                // If no exercises, add one
+                addExercise();
+            }
+        }
+        
+        function saveWorkout() {
+            // Validate form
+            const date = document.getElementById('workout-date').value;
+            const type = document.getElementById('workout-type').value;
+            
+            if (!date) {
+                alert('Por favor, selecciona una fecha para el entrenamiento.');
+                return;
+            }
+            
+            if (!type) {
+                alert('Por favor, selecciona un tipo de entrenamiento.');
+                return;
+            }
+            
+            // Get exercises
+            const exercises = [];
+            const exerciseElements = document.querySelectorAll('#exercises-container .exercise-item');
+            
+            for (const exerciseEl of exerciseElements) {
+                const name = exerciseEl.querySelector('.exercise-name').value;
+                const category = exerciseEl.querySelector('.exercise-category').value;
+                
+                if (!name) {
+                    alert('Por favor, introduce un nombre para todos los ejercicios.');
+                    return;
+                }
+                
+                const sets = [];
+                const setElements = exerciseEl.querySelectorAll('.set-row');
+                
+                for (const setEl of setElements) {
+                    const weight = setEl.querySelector('.set-weight').value;
+                    const reps = setEl.querySelector('.set-reps').value;
+                    
+                    if (!weight || !reps) {
+                        alert('Por favor, completa el peso y las repeticiones para todas las series.');
+                        return;
+                    }
+                    
+                    sets.push({
+                        weight: parseFloat(weight),
+                        reps: parseInt(reps)
+                    });
+                }
+                
+                exercises.push({
+                    name,
+                    category,
+                    sets
+                });
+            }
+            
+            // Create workout object
+            const workout = {
+                id: Date.now(), // Use timestamp as ID
+                date,
+                type,
+                notes: document.getElementById('workout-notes').value,
+                exercises,
+                createdAt: new Date().toISOString()
+            };
+            
+            // Save to local storage
+            let workouts = JSON.parse(localStorage.getItem('workouts') || '[]');
+            workouts.push(workout);
+            localStorage.setItem('workouts', JSON.stringify(workouts));
+            
+            // Show success message
+            alert('¡Entrenamiento guardado correctamente!');
+            
+            // Refresh workout history
+            loadWorkoutHistory();
+            
+            // Clear form
+            clearForm();
+        }
+        
+        function loadWorkoutHistory() {
+            const workouts = JSON.parse(localStorage.getItem('workouts') || '[]');
+            const noWorkoutsEl = document.getElementById('no-workouts');
+            const workoutsListEl = document.getElementById('workouts-list');
+            
+            if (workouts.length === 0) {
+                noWorkoutsEl.classList.remove('hidden');
+                workoutsListEl.classList.add('hidden');
+                return;
+            }
+            
+            noWorkoutsEl.classList.add('hidden');
+            workoutsListEl.classList.remove('hidden');
+            
+            // Clear previous history
+            workoutsListEl.innerHTML = '';
+            
+            // Sort workouts by date (newest first)
+            workouts.sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            // Add workouts to the list
+            for (const workout of workouts) {
+                const workoutEl = document.createElement('div');
+                workoutEl.className = 'bg-white p-4 rounded-lg border border-gray-200';
+                
+                // Format date
+                const workoutDate = new Date(workout.date);
+                const formattedDate = workoutDate.toLocaleDateString('es-ES', {
+                    weekday: 'long',
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+                
+                // Create workout header
+                const header = document.createElement('div');
+                header.className = 'flex flex-col md:flex-row md:items-center md:justify-between mb-4';
+                
+                const dateTypeDiv = document.createElement('div');
+                dateTypeDiv.innerHTML = `
+                    <h3 class="text-lg font-bold text-secondary">${formattedDate}</h3>
+                    <p class="text-gray-600">${workout.type}</p>
+                `;
+                
+                const actionsDiv = document.createElement('div');
+                actionsDiv.className = 'flex space-x-2 mt-2 md:mt-0';
+                
+                const viewBtn = document.createElement('button');
+                viewBtn.className = 'px-3 py-1 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300';
+                viewBtn.innerHTML = '<i class="fas fa-eye mr-1"></i> Ver';
+                viewBtn.addEventListener('click', function() {
+                    toggleWorkoutDetails(workout.id);
+                });
+                
+                const deleteBtn = document.createElement('button');
+                deleteBtn.className = 'px-3 py-1 bg-red-500 text-white rounded-md hover:bg-red-600 transition duration-300';
+                deleteBtn.innerHTML = '<i class="fas fa-trash mr-1"></i> Eliminar';
+                deleteBtn.addEventListener('click', function() {
+                    deleteWorkout(workout.id);
+                });
+                
+                actionsDiv.appendChild(viewBtn);
+                actionsDiv.appendChild(deleteBtn);
+                
+                header.appendChild(dateTypeDiv);
+                header.appendChild(actionsDiv);
+                
+                // Create workout details (initially hidden)
+                const details = document.createElement('div');
+                details.className = 'workout-details hidden';
+                details.id = `workout-details-${workout.id}`;
+                
+                // Add notes if any
+                if (workout.notes) {
+                    const notes = document.createElement('div');
+                    notes.className = 'mb-4 p-3 bg-gray-50 rounded-md';
+                    notes.innerHTML = `
+                        <p class="text-sm font-medium text-gray-700">Notas:</p>
+                        <p class="text-gray-600">${workout.notes}</p>
+                    `;
+                    details.appendChild(notes);
+                }
+                
+                // Add exercises
+                const exercisesList = document.createElement('div');
+                exercisesList.className = 'space-y-4';
+                
+                for (const exercise of workout.exercises) {
+                    const exerciseEl = document.createElement('div');
+                    exerciseEl.className = 'border-t border-gray-100 pt-4';
+                    
+                    const exerciseHeader = document.createElement('div');
+                    exerciseHeader.className = 'flex justify-between items-center mb-2';
+                    exerciseHeader.innerHTML = `
+                        <h4 class="font-bold text-gray-700">${exercise.name}</h4>
+                        ${exercise.category ? `<span class="text-xs bg-gray-200 text-gray-700 px-2 py-1 rounded-full">${exercise.category}</span>` : ''}
+                    `;
+                    
+                    const setsTable = document.createElement('div');
+                    setsTable.className = 'overflow-x-auto';
+                    setsTable.innerHTML = `
+                        <table class="min-w-full text-sm">
+                            <thead>
+                                <tr class="bg-gray-50">
+                                    <th class="py-2 px-3 text-left">Serie</th>
+                                    <th class="py-2 px-3 text-left">Peso (kg)</th>
+                                    <th class="py-2 px-3 text-left">Repeticiones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${exercise.sets.map((set, index) => `
+                                    <tr>
+                                        <td class="py-2 px-3">${index + 1}</td>
+                                        <td class="py-2 px-3">${set.weight}</td>
+                                        <td class="py-2 px-3">${set.reps}</td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    `;
+                    
+                    exerciseEl.appendChild(exerciseHeader);
+                    exerciseEl.appendChild(setsTable);
+                    exercisesList.appendChild(exerciseEl);
+                }
+                
+                details.appendChild(exercisesList);
+                
+                // Add all elements to the workout element
+                workoutEl.appendChild(header);
+                workoutEl.appendChild(details);
+                
+                // Add to the list
+                workoutsListEl.appendChild(workoutEl);
+            }
+        }
+        
+        function toggleWorkoutDetails(workoutId) {
+            const detailsEl = document.getElementById(`workout-details-${workoutId}`);
+            detailsEl.classList.toggle('hidden');
+        }
+        
+        function deleteWorkout(workoutId) {
+            if (confirm('¿Estás seguro de que quieres eliminar este entrenamiento? Esta acción no se puede deshacer.')) {
+                let workouts = JSON.parse(localStorage.getItem('workouts') || '[]');
+                workouts = workouts.filter(workout => workout.id !== workoutId);
+                localStorage.setItem('workouts', JSON.stringify(workouts));
+                
+                // Refresh workout history
+                loadWorkoutHistory();
+            }
+        }
+    </script>
+</body>
+</html>
