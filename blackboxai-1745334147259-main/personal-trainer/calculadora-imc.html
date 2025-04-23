@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de IMC - FitLife Entrenamiento Personal</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF6B35',
+                        secondary: '#2E4057',
+                        light: '#F7F7F7',
+                        dark: '#333333',
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                        heading: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans bg-light">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <a href="index.html" class="text-2xl font-bold text-primary font-heading">FitLife</a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-secondary hover:text-primary font-medium transition duration-300">Inicio</a>
+                    <a href="about.html" class="text-secondary hover:text-primary font-medium transition duration-300">Nosotros</a>
+                    <a href="plans.html" class="text-secondary hover:text-primary font-medium transition duration-300">Planes</a>
+                    <a href="testimonials.html" class="text-secondary hover:text-primary font-medium transition duration-300">Testimonios</a>
+                    <a href="contact.html" class="text-secondary hover:text-primary font-medium transition duration-300">Contacto</a>
+                </div>
+                <div class="hidden md:flex space-x-4">
+                    <a href="login.php" class="px-4 py-2 text-secondary font-medium hover:text-primary transition duration-300">Iniciar Sesión</a>
+                    <a href="register.php" class="px-4 py-2 bg-primary text-white rounded-md hover:bg-opacity-90 transition duration-300">Registrarse</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-secondary focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="md:hidden hidden pb-4">
+                <a href="index.html" class="block py-2 text-secondary hover:text-primary font-medium">Inicio</a>
+                <a href="about.html" class="block py-2 text-secondary hover:text-primary font-medium">Nosotros</a>
+                <a href="plans.html" class="block py-2 text-secondary hover:text-primary font-medium">Planes</a>
+                <a href="testimonials.html" class="block py-2 text-secondary hover:text-primary font-medium">Testimonios</a>
+                <a href="contact.html" class="block py-2 text-secondary hover:text-primary font-medium">Contacto</a>
+                <div class="flex space-x-4 mt-4">
+                    <a href="login.php" class="px-4 py-2 text-secondary font-medium hover:text-primary transition duration-300">Iniciar Sesión</a>
+                    <a href="register.php" class="px-4 py-2 bg-primary text-white rounded-md hover:bg-opacity-90 transition duration-300">Registrarse</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="py-20 bg-secondary">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold text-white font-heading mb-4">Calculadora de IMC</h1>
+            <p class="text-white text-lg max-w-3xl mx-auto">Calcula tu Índice de Masa Corporal (IMC) y descubre si estás en tu peso ideal.</p>
+        </div>
+    </section>
+
+    <!-- BMI Calculator Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto">
+                <div class="bg-light p-8 rounded-lg shadow-md">
+                    <h2 class="text-2xl font-bold text-secondary font-heading mb-6">Calcula tu IMC</h2>
+                    <p class="text-gray-600 mb-8">El Índice de Masa Corporal (IMC) es una medida que relaciona el peso y la altura para evaluar si una persona tiene un peso saludable. Es una herramienta útil para identificar posibles problemas de peso, aunque no tiene en cuenta la composición corporal (músculo vs grasa).</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                        <div>
+                            <div class="mb-6">
+                                <label for="height" class="block text-gray-700 font-medium mb-2">Altura (cm)</label>
+                                <input type="number" id="height" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Ej: 170">
+                            </div>
+                            <div class="mb-6">
+                                <label for="weight" class="block text-gray-700 font-medium mb-2">Peso (kg)</label>
+                                <input type="number" id="weight" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Ej: 70">
+                            </div>
+                            <button id="calculate-btn" class="px-6 py-3 bg-primary text-white font-medium rounded-md hover:bg-opacity-90 transition duration-300 w-full">Calcular IMC</button>
+                        </div>
+                        
+                        <div id="result-container" class="hidden bg-gray-100 p-6 rounded-lg">
+                            <h3 class="text-xl font-bold text-secondary mb-4">Tu resultado:</h3>
+                            <div class="mb-4">
+                                <p class="text-gray-600">Tu IMC es:</p>
+                                <p id="bmi-value" class="text-3xl font-bold text-primary"></p>
+                            </div>
+                            <div class="mb-4">
+                                <p class="text-gray-600">Categoría:</p>
+                                <p id="bmi-category" class="text-xl font-bold"></p>
+                            </div>
+                            <div>
+                                <p id="bmi-description" class="text-gray-600"></p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-blue-50 p-6 rounded-lg border border-blue-200">
+                        <h3 class="text-lg font-bold text-secondary mb-4">Categorías de IMC</h3>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full">
+                                <thead>
+                                    <tr class="bg-blue-100">
+                                        <th class="py-2 px-4 text-left">IMC</th>
+                                        <th class="py-2 px-4 text-left">Categoría</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b border-blue-100">
+                                        <td class="py-2 px-4">Menos de 18.5</td>
+                                        <td class="py-2 px-4">Bajo peso</td>
+                                    </tr>
+                                    <tr class="border-b border-blue-100">
+                                        <td class="py-2 px-4">18.5 - 24.9</td>
+                                        <td class="py-2 px-4">Peso normal</td>
+                                    </tr>
+                                    <tr class="border-b border-blue-100">
+                                        <td class="py-2 px-4">25.0 - 29.9</td>
+                                        <td class="py-2 px-4">Sobrepeso</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-2 px-4">30.0 o más</td>
+                                        <td class="py-2 px-4">Obesidad</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="mt-4 text-sm text-gray-600">Fuente: Organización Mundial de la Salud (OMS)</p>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <h3 class="text-xl font-bold text-secondary mb-4">¿Qué significa mi IMC?</h3>
+                        <p class="text-gray-600 mb-4">El IMC es una herramienta de evaluación inicial, pero no es un diagnóstico. Un IMC alto puede indicar un exceso de grasa corporal, mientras que un IMC bajo puede indicar un peso insuficiente.</p>
+                        <p class="text-gray-600 mb-4">Es importante tener en cuenta que el IMC no distingue entre masa muscular y grasa corporal. Por ejemplo, los atletas pueden tener un IMC alto debido a su mayor masa muscular, no porque tengan exceso de grasa.</p>
+                        <p class="text-gray-600">Para una evaluación más completa de tu composición corporal y estado de salud, te recomendamos consultar con un profesional de la salud o un entrenador personal.</p>
+                    </div>
+                    
+                    <div class="mt-8 text-center">
+                        <p class="text-gray-600 mb-4">¿Quieres mejorar tu composición corporal y alcanzar un peso saludable?</p>
+                        <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                            <a href="plans.html" class="px-6 py-3 bg-primary text-white font-medium rounded-md hover:bg-opacity-90 transition duration-300">Ver Planes de Entrenamiento</a>
+                            <a href="contact.html" class="px-6 py-3 bg-secondary text-white font-medium rounded-md hover:bg-opacity-90 transition duration-300">Contactar con un Entrenador</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4 font-heading">FitLife</h3>
+                    <p class="text-gray-400 mb-4">Transformando vidas a través del entrenamiento personalizado y un estilo de vida saludable.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-primary transition duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition duration-300">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition duration-300">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition duration-300">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4 font-heading">Enlaces Rápidos</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-primary transition duration-300">Inicio</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-primary transition duration-300">Nosotros</a></li>
+                        <li><a href="plans.html" class="text-gray-400 hover:text-primary transition duration-300">Planes</a></li>
+                        <li><a href="testimonials.html" class="text-gray-400 hover:text-primary transition duration-300">Testimonios</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-primary transition duration-300">Contacto</a></li>
+                        <li><a href="calculadora-imc.html" class="text-gray-400 hover:text-primary transition duration-300">Calculadora IMC</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4 font-heading">Servicios</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition duration-300">Entrenamiento Personal</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition duration-300">Asesoramiento Nutricional</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition duration-300">Entrenamiento en Grupo</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition duration-300">Programas Online</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition duration-300">Evaluación Física</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4 font-heading">Contacto</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-primary mt-1 mr-3"></i>
+                            <span class="text-gray-400">Calle Principal 123, Madrid, España</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone text-primary mr-3"></i>
+                            <span class="text-gray-400">+34 912 345 678</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope text-primary mr-3"></i>
+                            <span class="text-gray-400">info@fitlife.com</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-clock text-primary mr-3"></i>
+                            <span class="text-gray-400">Lun-Vie: 7:00 - 21:00</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-12 pt-8 text-center">
+                <p class="text-gray-400">&copy; 2023 FitLife - Entrenamiento Personal. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // BMI Calculator
+        document.getElementById('calculate-btn').addEventListener('click', function() {
+            const height = parseFloat(document.getElementById('height').value);
+            const weight = parseFloat(document.getElementById('weight').value);
+            
+            if (isNaN(height) || isNaN(weight) || height <= 0 || weight <= 0) {
+                alert('Por favor, introduce valores válidos para altura y peso.');
+                return;
+            }
+            
+            // Calculate BMI: weight (kg) / (height (m))^2
+            const heightInMeters = height / 100;
+            const bmi = weight / (heightInMeters * heightInMeters);
+            const roundedBMI = Math.round(bmi * 10) / 10;
+            
+            // Display result
+            document.getElementById('bmi-value').textContent = roundedBMI;
+            
+            // Determine category
+            let category, description, categoryColor;
+            
+            if (bmi < 18.5) {
+                category = 'Bajo peso';
+                description = 'Tu IMC indica que podrías tener un peso inferior al recomendado. Esto podría estar asociado con ciertos problemas de salud.';
+                categoryColor = 'text-blue-600';
+            } else if (bmi < 25) {
+                category = 'Peso normal';
+                description = '¡Felicidades! Tu IMC indica que tienes un peso saludable para tu altura.';
+                categoryColor = 'text-green-600';
+            } else if (bmi < 30) {
+                category = 'Sobrepeso';
+                description = 'Tu IMC indica que podrías tener sobrepeso. Considera adoptar hábitos más saludables de alimentación y ejercicio.';
+                categoryColor = 'text-yellow-600';
+            } else {
+                category = 'Obesidad';
+                description = 'Tu IMC indica obesidad, lo que puede aumentar el riesgo de desarrollar problemas de salud. Te recomendamos consultar con un profesional.';
+                categoryColor = 'text-red-600';
+            }
+            
+            document.getElementById('bmi-category').textContent = category;
+            document.getElementById('bmi-category').className = `text-xl font-bold ${categoryColor}`;
+            document.getElementById('bmi-description').textContent = description;
+            
+            // Show result container
+            document.getElementById('result-container').classList.remove('hidden');
+        });
+    </script>
+</body>
+</html>
