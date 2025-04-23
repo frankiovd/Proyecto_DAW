@@ -1,0 +1,15 @@
+/* App-wide styles */
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background-color: #F7F7F7;
+  color: #333333;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
